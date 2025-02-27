@@ -2,81 +2,75 @@ from QuanLySinhVien import QuanLySinhVien
 
 qlsv = QuanLySinhVien()
 
-while (1 == 1):
-    print("CHUONG TRINH QUAN LY SINH VIEN")
+while True:
+    print("CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN")
     print("************************MENU************************")
-    print("1. Them sinh vien")
-    print("2. Cap nhat thong tin sinh vien boi id")
-    print("3. Xoa sinh vien boi id")
-    print("4. Tim kiem sinh vien theo ten")
-    print("5. Sap xep sinh vien theo diem trung binh")
-    print("6. Sap xep sinh vien theo ten ")
-    print("7. Hien thi danh sach sinh vien")
-    print("0. Thoat chuong trinh")
+    print("1. Thêm sinh viên")
+    print("2. Cập nhật thông tin sinh viên theo ID")
+    print("3. Xóa sinh viên theo ID")
+    print("4. Tìm kiếm sinh viên theo tên")
+    print("5. Sắp xếp sinh viên theo điểm trung bình")
+    print("6. Sắp xếp sinh viên theo tên")
+    print("7. Hiển thị danh sách sinh viên")
+    print("0. Thoát chương trình")
     print("***************************************************")
-    
-    key = int(input("Nhap lua chon cua ban: "))
-    if(key == 1):
-        print("\n1. Them sinh vien")
+
+    key = int(input("Nhập lựa chọn của bạn: "))
+    if key == 1:
+        print("\n1. Thêm sinh viên")
         qlsv.nhapSV()
-        print("\nThem sinh vien thanh cong.")
-    elif(key == 2):
-        if(qlsv.soLuongSV() > 0):
-            print("\n2. Cap nhat thong tin sinh vien boi id")
-            print("\nNhap ID: ")
-            ID = int(input())
-            qlsv.updateSV()
-            print("\nCap nhat thong tin sinh vien thanh cong.")
+        print("\nThêm sinh viên thành công.")
+    elif key == 2:
+        if qlsv.soLuongSV() > 0:
+            print("\n2. Cập nhật thông tin sinh viên theo ID")
+            ID = int(input("Nhập ID sinh viên cần cập nhật: "))
+            qlsv.updateSV(ID)
         else:
-            print("\nDanh sach sinh vien rong.")
-    elif(key == 3):
-        if(qlsv.soLuongSV() > 0):
-            print("\n3. Xoa sinh vien boi id")
-            print("\nNhap ID: ")
-            ID = int(input())
-            if(qlsv.deleteByID(ID)):
-                print("\nXoa sinh vien thanh cong.")
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 3:
+        if qlsv.soLuongSV() > 0:
+            print("\n3. Xóa sinh viên theo ID")
+            ID = int(input("Nhập ID sinh viên cần xóa: "))
+            if qlsv.deleteByID(ID):
+                print("\nXóa sinh viên thành công.")
             else:
-                print("\nKhong tim thay sinh vien.")
+                print("\nKhông tìm thấy sinh viên.")
         else:
-            print("\nDanh sach sinh vien rong.")
-    elif(key == 4):
-        if(qlsv.soLuongSV() > 0):
-            print("\n4. Tim kiem sinh vien theo ten")
-            print("\nNhap ten: ")
-            name = input()
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 4:
+        if qlsv.soLuongSV() > 0:
+            print("\n4. Tìm kiếm sinh viên theo tên")
+            name = input("Nhập tên sinh viên cần tìm: ")
             listSV = qlsv.findByName(name)
-            if(len(listSV) > 0):
-                print("\nDanh sach sinh vien tim thay:")
-                print("\nNhap ten de tim kiem: ")
-                name = input()
-                searchResult = qlsv.findByName(name)
-                qlsv.showListSV(searchResult)
+            if len(listSV) > 0:
+                print("\nDanh sách sinh viên tìm thấy:")
+                qlsv.showSinhVien(listSV)
             else:
-                print("\nDanh sach sinh vien rong.")
-    elif(key == 5):
-        if(qlsv.soLuongSV() > 0):
-            print("\n5. Sap xep sinh vien theo diem trung binh")
+                print("\nKhông tìm thấy sinh viên.")
+        else:
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 5:
+        if qlsv.soLuongSV() > 0:
+            print("\n5. Sắp xếp sinh viên theo điểm trung bình")
             qlsv.sortbyGPA()
             qlsv.showSinhVien(qlsv.getListSV())
         else:
-            print("\nDanh sach sinh vien rong.")
-    elif(key == 6):
-        if(qlsv.soLuongSV() > 0):
-            print("\n6. Sap xep sinh vien theo ten")
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 6:
+        if qlsv.soLuongSV() > 0:
+            print("\n6. Sắp xếp sinh viên theo tên")
             qlsv.sortbyName()
             qlsv.showSinhVien(qlsv.getListSV())
         else:
-            print("\nDanh sach sinh vien rong.")
-    elif(key == 7):
-        if(qlsv.soLuongSV() > 0):
-            print("\n7. Hien thi danh sach sinh vien")
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 7:
+        if qlsv.soLuongSV() > 0:
+            print("\n7. Hiển thị danh sách sinh viên")
             qlsv.showSinhVien(qlsv.getListSV())
         else:
-            print("\nDanh sach sinh vien rong.")
-    elif(key == 0):
-        print("\nBan da chon thoat chuong trinh.")
+            print("\nDanh sách sinh viên rỗng.")
+    elif key == 0:
+        print("\nBạn đã chọn thoát chương trình.")
         break
     else:
-        print("\nLua chon khong hop le.")
-        
+        print("\nLựa chọn không hợp lệ.")
