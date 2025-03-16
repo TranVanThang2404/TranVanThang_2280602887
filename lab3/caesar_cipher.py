@@ -8,13 +8,13 @@ class MyApp(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.call_api_encrypt)
-        self.ui.pushButton_2.clicked.connect(self.call_api_decrypt)
+        self.ui.btn_encrypt.clicked.connect(self.call_api_encrypt)
+        self.ui.btn_decrypt.clicked.connect(self.call_api_decrypt)
     
     def call_api_encrypt(self):
         # Get the text and key input
-        plain_text = self.ui.textEdit.toPlainText()
-        key = self.ui.textEdit_2.toPlainText()
+        plain_text = self.ui.textEdit.toPlainText()  # This is the input field for plain text
+        key = self.ui.textEdit_2.toPlainText()  # This is the key input field
 
         # Validate input text and key
         if not plain_text:
@@ -37,7 +37,8 @@ class MyApp(QMainWindow):
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 data = response.json()
-                self.ui.textEdit.setText(data["encrypted_message"])
+                # Update only the field for the encrypted message
+                self.ui.textEdit_3.setText(data["encrypted_message"])  # This is the field for encrypted message
 
                 self.show_info_message("Encrypted Successfully")
             else:
@@ -47,9 +48,8 @@ class MyApp(QMainWindow):
 
     def call_api_decrypt(self):
         # Get the text and key input
-        cipher_text = self.ui.textEdit_3.toPlainText()
-        key = self.ui.textEdit_2.toPlainText()
-
+        cipher_text = self.ui.textEdit_3.toPlainText()  # This is the input field for cipher text
+        key = self.ui.textEdit_2.toPlainText()  # This is the key input field
 
         # Validate input text and key
         if not cipher_text:
@@ -72,7 +72,8 @@ class MyApp(QMainWindow):
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 data = response.json()
-                self.ui.textEdit_3.setText(data["decrypted_message"])
+                # Update only the field for the decrypted message
+                self.ui.textEdit.setText(data["decrypted_message"])  # This is the field for decrypted message
 
                 self.show_info_message("Decrypted Successfully")
             else:
